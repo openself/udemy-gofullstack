@@ -31,6 +31,8 @@ func main() {
 	r.HandleFunc("/foo", handlers.FooHandler)
 	r.HandleFunc("/signup", handlers.SignUpHandler).Methods("GET", "POST")
 	r.HandleFunc("/postpreview", handlers.PostPreviewHandler).Methods("GET", "POST")
+	r.HandleFunc("/upload-image", handlers.UploadImageHandler).Methods("GET", "POST")
+	r.HandleFunc("/upload-video", handlers.UploadVideoHandler).Methods("GET", "POST")
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
 	http.Handle("/", middleware.PanicRecoveryHandler(ghandlers.LoggingHandler(os.Stdout, r)))
 	http.ListenAndServe(WEBSERVERPORT, nil)
